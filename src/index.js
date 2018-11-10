@@ -37,8 +37,15 @@ const coordsToPoint = (coords) => {
     return [parseFloat(parts[0] + parts[1]), parseFloat(parts[2])];
   } else if (parts.length === 2) {
     return parts.map(parseFloat);
+  } else if (parts.length === 1) {
+    const subParts = coords.split(/(?=[.])/g);
+    if (subParts.length === 3) {
+      return [parseFloat(subParts[0] + subParts[1]), parseFloat(subParts[2])];
+    } else {
+      throw '@ntag/react-fontawesome: wrong number of subparts', coords;
+    }
   } else {
-    throw 'Wrong number of parts', coords;
+    throw '@ntag/react-fontawesome: wrong number of parts', coords;
   }
 };
 
