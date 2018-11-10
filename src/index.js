@@ -123,6 +123,11 @@ class FontAwesomeIconColored extends Component {
   }
 
   componentDidMount() {
+    // If no key starts with fill, do nothing
+    if (!Object.keys(this.props).find((key) => key.startsWith('fill'))) {
+      return;
+    }
+
     const node = ReactDOM.findDOMNode(this.iconElement.current);
     window.a = node.firstElementChild;
     const d = node.firstElementChild.getAttribute('d');
