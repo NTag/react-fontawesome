@@ -1,6 +1,6 @@
 {
   "name": "@ntag/react-fontawesome",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Font Awesome 5 React component, improved, splitting icons in individual pieces that can be colored",
   "main": "dist/index.js",
   "scripts": {
