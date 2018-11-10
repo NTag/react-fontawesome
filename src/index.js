@@ -112,7 +112,7 @@ class FontAwesomeIconColored extends Component {
     this.iconElement = React.createRef();
   }
 
-  color = (i) => {
+  color(i) {
     if (this.props[`fill${i}`]) {
       return this.props[`fill${i}`];
     } else if (this.props.fill && this.props.fill.length > i) {
