@@ -1,11 +1,15 @@
 <div style="text-align: center">
-  <img src="img/react-fontawesome-colored.png">
+  <img src="https://raw.githubusercontent.com/NTag/react-fontawesome/master/img/react-fontawesome-colored.png">
 </div>
 
 This package allows you to color **individual pieces** of [Font Awesome](https://fontawesome.com) icons, using React.
 
 
 It is basically the same as [@fortawesome/react-fontawesome](https://github.com/FortAwesome/react-fontawesome), except `<FontAwesomeIcon>` accepts a new prop `fill={['color1', 'color2', 'color3']}` to specify the colors of the different parts of the icon.
+
+<a title="@ntag/react-fontawesome on npm" href="https://www.npmjs.com/package/@ntag/react-fontawesome">
+  <img src="https://img.shields.io/npm/v/@ntag/react-fontawesome.svg" alt="npm badge" />
+</a>
 
 # Installation
 Install [React FontAwesome](https://fontawesome.com/how-to-use/on-the-web/using-with/react) as usual, except `@fortawesome/react-fontawesome` you replace by `@ntag/react-fontawesome`:
