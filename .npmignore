@@ -2,3 +2,5 @@ src/
 .babelrc
 .eslintrc.json
 img/
+docs/
+docs-src/

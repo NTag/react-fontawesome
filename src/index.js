@@ -129,6 +129,13 @@ class FontAwesomeIconColored extends Component {
     }
   }
 
+  componentDidUpdate() {
+    const node = ReactDOM.findDOMNode(this.iconElement.current);
+    node.childNodes.forEach((child, i) => {
+      child.setAttribute('fill', this.color(i));
+    });
+  }
+
   componentDidMount() {
     // If no key starts with fill, do nothing
     if (!Object.keys(this.props).find((key) => key.startsWith('fill'))) {
@@ -136,7 +143,6 @@ class FontAwesomeIconColored extends Component {
     }
 
     const node = ReactDOM.findDOMNode(this.iconElement.current);
-    window.a = node.firstElementChild;
     const d = node.firstElementChild.getAttribute('d');
     const parts = splitPath(d);
     node.removeChild(node.firstElementChild);
