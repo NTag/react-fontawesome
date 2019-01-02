@@ -71,6 +71,21 @@ const simplifyPath = (path) => {
   const [position, ...rest] = path.split(/(?=[a-ln-z])/i);
   return simplifyPosition(position) + rest.join('');
 };
+const pathDirection = (path) => {
+  let angle = 0;
+  const p = pathToSVG(path);
+  const length = p.getTotalLength();
+  for (let i = 1; i < 49; i += 1) {
+    const A = p.getPointAtLength(i * length / 50);
+    const B = p.getPointAtLength((i + 1) * length / 50);
+    const C = p.getPointAtLength((i + 2) * length / 50);
+    const ab = Math.sqrt(Math.pow(B.y - A.y, 2) + Math.pow(B.x - A.x, 2));
+    const bc = Math.sqrt(Math.pow(B.y - C.y, 2) + Math.pow(B.x - C.x, 2));
+    const abc = (B.x - A.x) * (C.y - B.y) - (B.y - A.y) * (C.x - B.x);
+    angle += Math.asin(abc / (ab * bc));
+  }
+  return angle >= 0;
+};
 
 const splitPath = (d) => {
   d = d.replace(/v([-0-9.]+)/g, 'l0 $1');
@@ -82,18 +97,26 @@ const splitPath = (d) => {
 
   const newParts = [];
   const parts = d.split(/(?=m)/ig);
-  let currentPart;
+  let currentPart, currentDirection;
   const currentParts = {
     negative: [],
   };
   let position = '';
   for (let part of parts) {
     const completePart = simplifyPath(position + part);
+    const completeDirection = pathDirection(completePart);
 
     if (!currentPart) {
       currentPart = part;
       currentParts.positive = currentPart;
+      currentDirection = completeDirection;
+    } else if (currentParts.negative.length === 0 && completeDirection !== currentDirection && pathContain(completePart, currentParts.positive)) {
+      currentParts.negative.push(currentParts.positive);
+      currentParts.positive = completePart;
+      currentDirection = completeDirection;
+      currentPart += part;
     } else if (
+      completeDirection !== currentDirection &&
       (pathContain(currentParts.positive, completePart) || pathContain(completePart, currentParts.positive)) &&
       (!currentParts.negative.find((p) => pathContain(p, completePart) || pathContain(completePart, p)))
     ) {
@@ -104,6 +127,7 @@ const splitPath = (d) => {
       currentPart = completePart;
       currentParts.positive = currentPart;
       currentParts.negative = [];
+      currentDirection = completeDirection;
     }
 
     position = simplifyPosition(position + positionFromPath(part));
