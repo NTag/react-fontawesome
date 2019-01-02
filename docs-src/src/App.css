@@ -1,0 +1,75 @@
+.App {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 5em;
+}
+.Icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.Icon {
+  font-size: 5em;
+  width: 1.5em;
+  text-align: center;
+}
+.Title {
+  text-align: center;
+  font-size: 4em;
+  margin: 0.5em;
+  background: #111;
+}
+.gradient {
+  display: inline-block;
+  background: black;
+  color: white;
+  position: relative;
+  mix-blend-mode: lighten;
+}
+.gradient::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to right, #fba506, #fc1da7);
+  content: '';
+  display: block;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.Button {
+  display: inline-block;
+  border-radius: 8px;
+  border: 1px solid white;
+  background: #222;
+  padding: 16px;
+  font-variant: small-caps;
+  margin: 0.5em;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+.Button:hover {
+  opacity: 0.9;
+}
+.Button span {
+  display: inline-block;
+  margin-left: 8px;
+}
+.Buttons {
+  text-align: center;
+  margin-top: 3em;
+}
+.Legend {
+  text-align: center;
+}
+.Legend div {
+  margin: 2em;
+}
+a {
+  color: #FF4136;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
